@@ -5,7 +5,9 @@ Square::Square(){
 	sSquareNumber = 0;
 	sValue = 0;
 	sIsMarged = false;
-	for (int ii = 0; ii < 9; ii++) sSelectedNumbers[ii] = false;
+	sIsConstant = false;
+	for (int ii = 0; ii < 9; ii++) 
+		sSelectedNumbers[ii] = false;
 
 	this->setSquareLocation();
 }
@@ -14,7 +16,9 @@ Square::Square(int squareNumber) {
 	sSquareNumber = squareNumber;
 	sValue = 0;
 	sIsMarged = false;
-	for (int ii = 0; ii < 9; ii++) sSelectedNumbers[ii] = false;
+	sIsConstant = false;
+	for (int ii = 0; ii < 9; ii++) 
+		sSelectedNumbers[ii] = false;
 
 	this->setSquareLocation();
 }
@@ -56,6 +60,10 @@ void Square::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 			}
 		}
 	}
+	else if (sIsMarged == true) {
+		this->adaptFontSize(painter, Qt::AlignCenter, rect, QString::number(sValue));
+		painter->drawText(rect, Qt::AlignCenter, QString::number(sValue));
+	}
 
 
 }
@@ -66,6 +74,14 @@ void Square::mousePressEvent(QGraphicsSceneMouseEvent *event)
 	int miniSquareClicked = this->checkWhichMiniSquare(event->pos());
 	sSelectedNumbers[miniSquareClicked] = !sSelectedNumbers[miniSquareClicked];
 	this->update();
+}
+
+void Square::mouseDoubleClickEvent(QGraphicsSceneMouseEvent * event) {
+	if (!sIsConstant) {
+		sIsMarged = !sIsMarged;
+		sValue = this->checkWhichMiniSquare(event->pos()) + 1;	//+1 because squareNumber is (0-8)
+		this->update();
+	}
 }
 
 int Square::checkWhichMiniSquare(QPointF mousePos) 
@@ -123,4 +139,15 @@ void Square::setSquareLocation() {
 
 	sStartLocationX = BOARD_START_POINT + (sXCoordinate-1) * SQUARE_SIZE +xOffset;
 	sStartLocationY = BOARD_START_POINT + (sYCoordinate-1) * SQUARE_SIZE +yOffset;
+}
+
+void Square::adaptFontSize(QPainter * painter, int flags, QRectF drawRect, QString text) {
+	QRect fontBoundRect =
+		painter->fontMetrics().boundingRect(drawRect.toRect(), flags, text);
+	float xFactor = drawRect.width() / fontBoundRect.width();
+	float yFactor = drawRect.height() / fontBoundRect.height();
+	float factor = xFactor < yFactor ? xFactor : yFactor;
+	QFont f = painter->font();
+	f.setPointSizeF(f.pointSizeF()*factor);
+	painter->setFont(f);
 }
