@@ -2,11 +2,17 @@
 
 Board::Board(){
 	thickPen = QPen(Qt::black, THICK_PEN_THICKNESS);
+
+	Square *squares[81];
+	for (int ii = 0; ii < 81; ii++) {
+		squares[ii] = new Square(ii);
+		this->addItem(squares[ii]);
+	}
+
 	this->drawBoard();
 }
 
-Board::~Board()
-{
+Board::~Board(){
 }
 
 void Board::drawBoard(){

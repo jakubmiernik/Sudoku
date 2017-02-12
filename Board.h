@@ -1,4 +1,3 @@
-#pragma once
 #include "ui_mainwindow.h"
 #include "Square.h"
 #include "Config.h"

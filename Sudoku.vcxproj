@@ -148,6 +148,7 @@
     <ClCompile Include="mainwindow.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Square.cpp" />
+    <ClCompile Include="Sudoku.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -179,6 +180,7 @@
     <ClInclude Include="Config.h" />
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h" />
     <ClInclude Include="Square.h" />
+    <ClInclude Include="Sudoku.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
