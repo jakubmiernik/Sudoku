@@ -10,6 +10,9 @@
 
 #include "Config.h"
 #include "Square.h"
+//#include "Board.h"
+
+
 namespace Ui {
 class MainWindow;
 }
@@ -27,6 +30,8 @@ private:
     QGraphicsScene *scene;
     QGraphicsEllipseItem *ellipse;
     QGraphicsRectItem *rectangle;
+//private slots:
+	//void genetateButtonAction();
 };
 
 #endif // MAINWINDOW_H

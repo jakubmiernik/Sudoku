@@ -24,12 +24,14 @@ private:
 	QRectF boundingRect() const;
 
 public:
+	Square();
+	Square(int squareNumber);
+	~Square();
+	void setConstantValue(int value);
 	void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget);
 	void adaptFontSize(QPainter * painter, int flags, QRectF drawRect, QString text);
 	void mousePressEvent(QGraphicsSceneMouseEvent * event);
 	void mouseDoubleClickEvent(QGraphicsSceneMouseEvent * event);
-	Square();
-	Square(int squareNumber);
-	~Square();
+	static int squareGlobalCoordinatesToGlobalNumber(int xCoordinate, int yCoordinate);
 };
 

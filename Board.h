@@ -8,7 +8,8 @@ private:
 	Square squares[81];
 	QPen thickPen;
 public:
-	void drawBoard();
 	Board();
 	~Board();
+	void drawBoard();
+	void fillBoard(int table[9][9]);
 };

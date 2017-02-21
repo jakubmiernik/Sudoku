@@ -4,18 +4,20 @@
 #include <stdlib.h> 
 #include <time.h>
 #include "mainwindow.h"
+#include "Config.h"
 
 class Sudoku
 {
 private:
-	
 
 public:
-	// zmieniec tabele na prywatna po debugu 
 	int sudokuTable[9][9];		//name convention: sudokuTable[yy][xx]
 	Sudoku();
+	Sudoku(int sSudokuTable[9][9]);
 	~Sudoku();
-	void generateSudoku();
+	void generateSudokuPuzzle(int difficultLevel);
+	bool solveSudoku();
+	void generateSudoku(); // TO DO: move it to private
 	bool checkNumber(int xCoordinate, int yCoordinate, int value);
 	int* squareCoordinatesToGroupCoordinates(int x, int y);
 	void debugPrintSudoku();

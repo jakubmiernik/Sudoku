@@ -27,6 +27,19 @@ Square::~Square()
 {
 }
 
+void Square::setConstantValue(int value)
+{
+	sValue = value;
+	sIsConstant = true;
+	sIsMarged = true;
+	/*try {
+		this->update();
+	}
+	catch () {
+		OutputDebugStringA("dasads");
+	}*/
+}
+
 QRectF Square::boundingRect() const
 {
 	// outer most edges
@@ -70,7 +83,6 @@ void Square::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 
 void Square::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-	//sIsMarged = !sIsMarged;
 	int miniSquareClicked = this->checkWhichMiniSquare(event->pos());
 	sSelectedNumbers[miniSquareClicked] = !sSelectedNumbers[miniSquareClicked];
 	this->update();
@@ -119,6 +131,11 @@ int* Square::miniSquareNumberToCoordinates(int numer) {
 int Square::miniSquareCoordinatesToNumber(int xCoordinate, int yCoordinate) {
 	// function to change miniSquareCoordinates (1-3) on squareNumber (0-8)
 	return (xCoordinate + 3 * (yCoordinate - 1)) - 1;
+}
+
+int Square::squareGlobalCoordinatesToGlobalNumber(int xCoordinate, int yCoordinate) {
+	// function to change squareCoordinations in sudoku (1-9) on squareNumber (0-80)
+	return (xCoordinate + 9 * (yCoordinate - 1)) - 1;
 }
 
 void Square::setSquateCoordinations() {

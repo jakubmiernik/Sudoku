@@ -19,7 +19,91 @@ Sudoku::Sudoku(){
 	this->generateSudoku();
 }
 
+Sudoku::Sudoku(int sSudokuTable[9][9]) {
+	for (int xx = 0; xx < 9; xx++) {
+		for (int yy = 0; yy < 9; yy++) {
+			sudokuTable[xx][yy] = sSudokuTable[xx][yy];
+		}
+	}
+}
+
 Sudoku::~Sudoku(){
+}
+
+void Sudoku::generateSudokuPuzzle(int difficultLevel) {
+	// function to generate sudoku puzzle from full solved sudoku
+	// generating take place by diging hols in full solved sudoku
+
+	// first generate full solved sudoku
+	this->generateSudoku();
+
+	int cellsToClear = 20;
+	int numberOfEmpty = 0;
+	srand(time(NULL));
+
+	int watchdog = 0;
+	// next dig the holes
+	while (cellsToClear > numberOfEmpty) {
+		// select random cell to clear;
+		int x = rand() % 9;
+		int y = rand() % 9;
+
+		// clear this cell but remember this value
+		int selectedValue = sudokuTable[y][x];
+		sudokuTable[y][x] = 0;
+
+		//check if sudoku can be solved without this value
+		Sudoku *tmpSudoku = new Sudoku(sudokuTable);
+		if (tmpSudoku->solveSudoku()) {
+			numberOfEmpty++;
+		}
+		else {
+			sudokuTable[y][x] = selectedValue;
+		}
+		if (watchdog > 10000) {
+			break;
+			OutputDebugStringA("Loop killed by watchdog");
+		}
+			
+	}
+}
+
+bool Sudoku::solveSudoku() {
+	// function to solve sudoku if it is not solved
+	// this function using recursion to solve sudoku
+
+	int row, col;
+	//finding empty cell
+	for (col = 0; col < 9; col++) {
+		for (row = 0; row < 9; row++) {
+			if (sudokuTable[row][col] == EMPTY_VALUE) {
+				// goto use to exit both loop same time 
+				// and by the way jump over return
+				goto end_loops;
+			}			
+		}
+	}
+	// return true if there is no empty cells
+	return true;
+
+	// enter here if find empty cell
+end_loops:
+
+	// loop over possible numbers
+	for(int ii=1; ii<10; ii++){
+		// for each number check if it fit in empty place
+		if ((this->checkNumber(col, row, ii)) == true) {
+			// if fits place it in sudoku and try solve sudoku with this number
+			sudokuTable[row][col] = ii;
+			if (solveSudoku())
+				// if sudoku solved with this number return true
+				return true;
+			else
+				//else make this number 0
+				sudokuTable[row][col] = EMPTY_VALUE;
+		}
+	}
+	return false;
 }
 
 void Sudoku::generateSudoku(){
@@ -94,6 +178,9 @@ bool Sudoku::checkNumber(int xCoordinate, int yCoordinate, int value) {
 }
 
 int* Sudoku::squareCoordinatesToGroupCoordinates(int x, int y) {
+	// TO DO: zamiast zwracac tablice lepiej podawac ja do wypelnienai przez referencje 
+	// function to get number of sudoku group (3x3) for given number on position (x,y)
+
 	int groupX = 0;
 	int groupY = 0;
 	if (x >= 0 && x < 3) groupX = 1;
@@ -109,6 +196,8 @@ int* Sudoku::squareCoordinatesToGroupCoordinates(int x, int y) {
 }
 
 void Sudoku::debugPrintSudoku() {
+	// simple function to draw on screen sudoku puzzle
+
 	for (int yy = 0; yy < 9; yy++) {
 		for (int xx = 0; xx < 9; xx++) {
 			OutputDebugStringA(std::to_string(sudokuTable[yy][xx]).c_str());
@@ -116,4 +205,5 @@ void Sudoku::debugPrintSudoku() {
 		}
 		OutputDebugStringA("\n");
 	}
+	OutputDebugStringA("\n");
 }
