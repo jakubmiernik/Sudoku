@@ -7,10 +7,11 @@
 #include <QtGui>
 #include <QGraphicsItem>
 #include <QGraphicsScene>
+#include <QMessageBox>
 
 #include "Config.h"
+#include "ui_mainwindow.h"
 #include "Square.h"
-//#include "Board.h"
 
 
 namespace Ui {
@@ -28,10 +29,11 @@ public:
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
+	//Board *sceneBoard;
     QGraphicsEllipseItem *ellipse;
     QGraphicsRectItem *rectangle;
-//private slots:
-	//void genetateButtonAction();
+private slots:
+	void genetateButtonAction();
 };
 
 #endif // MAINWINDOW_H

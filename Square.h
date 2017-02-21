@@ -1,3 +1,6 @@
+#ifndef SQUARE_H
+#define SQUARE_H
+
 #pragma once
 #include "mainwindow.h"
 #include "Config.h"
@@ -35,3 +38,4 @@ public:
 	static int squareGlobalCoordinatesToGlobalNumber(int xCoordinate, int yCoordinate);
 };
 
+#endif //SQUARE_H

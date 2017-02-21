@@ -48,9 +48,9 @@ int main(int argc, char *argv[])
 	//Sudoku *sudoku3 = new Sudoku(sudokuToSolve);
 	//sudoku3->debugPrintSudoku();
 
-	Sudoku *sudoku = new Sudoku();
+	//Sudoku *sudoku = new Sudoku();
 	//sudoku->generateSudokuPuzzle(7);
-	sudoku->debugPrintSudoku();
+	//sudoku->debugPrintSudoku();
 
     return a.exec();
 }

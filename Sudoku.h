@@ -1,3 +1,6 @@
+#ifndef SUDOKU_H
+#define SUDOKU_H
+
 #include <algorithm>
 #include <vector>
 #include <string>
@@ -22,3 +25,5 @@ public:
 	int* squareCoordinatesToGroupCoordinates(int x, int y);
 	void debugPrintSudoku();
 };
+
+#endif //SUDOKU_H

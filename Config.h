@@ -1,3 +1,6 @@
+#ifndef CONFIG_H
+#define CONFIG_H
+
 //Header to store some configuration value
 
 #define BOARD_START_POINT -300
@@ -12,3 +15,5 @@
 #define THIN_PEN_THICKNESS 1
 
 #define EMPTY_VALUE 0
+
+#endif //CONFIG_H

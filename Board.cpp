@@ -3,7 +3,6 @@
 Board::Board(){
 	thickPen = QPen(Qt::black, THICK_PEN_THICKNESS);
 
-	Square *squares[81];
 	for (int ii = 0; ii < 81; ii++) {
 		squares[ii] = new Square(ii);
 		this->addItem(squares[ii]);
@@ -28,8 +27,12 @@ void Board::drawBoard(){
 void Board::fillBoard(int table[9][9]) {
 	for (int yy = 0; yy < 9; yy++) {
 		for (int xx = 0; xx < 9; xx++) {
-			int squareNumber = Square::squareGlobalCoordinatesToGlobalNumber(xx, yy);
-			squares[squareNumber].setConstantValue(table[yy][xx]);
+			int squareNumber = Square::squareGlobalCoordinatesToGlobalNumber(xx+1, yy+1);
+			squares[squareNumber]->setConstantValue(table[yy][xx]);
 		}
 	}
+	/*for (int ii = 0; ii < 81; ii++) {
+		squares[ii]->setConstantValue(1);
+	}*/
+
 }
