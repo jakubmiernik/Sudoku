@@ -32,12 +32,17 @@ void Square::setConstantValue(int value)
 	sValue = value;
 	sIsConstant = true;
 	sIsMarged = true;
-	/*try {
-		this->update();
-	}
-	catch () {
-		OutputDebugStringA("dasads");
-	}*/
+
+	this->update();
+}
+
+void Square::clear() {
+	sValue = 0;
+	sIsMarged = false;
+	sIsConstant = false;
+	for (int ii = 0; ii < 9; ii++)
+		sSelectedNumbers[ii] = false;
+	this->update();
 }
 
 QRectF Square::boundingRect() const

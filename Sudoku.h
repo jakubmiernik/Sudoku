@@ -6,8 +6,10 @@
 #include <string>
 #include <stdlib.h> 
 #include <time.h>
-#include "mainwindow.h"
+#include <Windows.h>
+
 #include "Config.h"
+
 
 class Sudoku
 {

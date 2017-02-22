@@ -1,7 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-
 #include <QMainWindow>
 #include <QtCore>
 #include <QtGui>
@@ -9,9 +8,11 @@
 #include <QGraphicsScene>
 #include <QMessageBox>
 
+#include "Square.h"
+#include "Board.h"
+#include "Sudoku.h"
 #include "Config.h"
 #include "ui_mainwindow.h"
-#include "Square.h"
 
 
 namespace Ui {
@@ -29,9 +30,7 @@ public:
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
-	//Board *sceneBoard;
-    QGraphicsEllipseItem *ellipse;
-    QGraphicsRectItem *rectangle;
+	Board *sceneBoard;
 private slots:
 	void genetateButtonAction();
 };

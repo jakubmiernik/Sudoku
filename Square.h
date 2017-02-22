@@ -1,10 +1,13 @@
 #ifndef SQUARE_H
 #define SQUARE_H
 
-#pragma once
-#include "mainwindow.h"
-#include "Config.h"
+#include <QtCore>
+#include <QtGui>
+#include <QGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
+
+#include "Config.h"
+
 
 class Square : public QGraphicsItem
 {
@@ -31,6 +34,7 @@ public:
 	Square(int squareNumber);
 	~Square();
 	void setConstantValue(int value);
+	void clear();
 	void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget);
 	void adaptFontSize(QPainter * painter, int flags, QRectF drawRect, QString text);
 	void mousePressEvent(QGraphicsSceneMouseEvent * event);

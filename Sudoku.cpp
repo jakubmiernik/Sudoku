@@ -112,8 +112,16 @@ void Sudoku::generateSudoku(){
 
 	std::vector <int> possibleNumbers;
 	srand(time(NULL));
+	//watchdog to kill generating and start new one if it take to much time
+	int watchdogCounter = 0; 
 	for (int yy = 0; yy < 9; yy++) {
+		watchdogCounter++;
+		if (watchdogCounter > 100) {
+			break;
+			this->generateSudoku();
+		}
 		//filling the vector of possible numbers for yy row
+		possibleNumbers.clear();
 		for (int jj = 1; jj < 10; jj++) {
 			possibleNumbers.push_back(jj);
 		}

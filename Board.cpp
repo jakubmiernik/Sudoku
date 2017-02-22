@@ -13,6 +13,11 @@ Board::Board(){
 Board::~Board(){
 }
 
+void Board::clear() {
+	for (int ii = 0; ii < 81; ii++) {
+		squares[ii]->clear();
+	}
+}
 void Board::drawBoard(){
 	for (int ii = 0; ii<3; ii++) {
 		for (int jj = 0; jj<3; jj++) {
@@ -25,14 +30,13 @@ void Board::drawBoard(){
 }
 
 void Board::fillBoard(int table[9][9]) {
+	this->clear();
 	for (int yy = 0; yy < 9; yy++) {
 		for (int xx = 0; xx < 9; xx++) {
 			int squareNumber = Square::squareGlobalCoordinatesToGlobalNumber(xx+1, yy+1);
-			squares[squareNumber]->setConstantValue(table[yy][xx]);
+			if(table[yy][xx]!= 0)
+				squares[squareNumber]->setConstantValue(table[yy][xx]);
 		}
 	}
-	/*for (int ii = 0; ii < 81; ii++) {
-		squares[ii]->setConstantValue(1);
-	}*/
 
 }

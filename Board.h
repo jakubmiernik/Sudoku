@@ -1,6 +1,9 @@
 #ifndef BOARD_H
 #define BOARD_H
 
+#include <QGraphicsScene>
+#include <QtCore>
+
 #include "Config.h"
 #include "Square.h"
 
@@ -12,6 +15,7 @@ private:
 public:
 	Board();
 	~Board();
+	void clear();
 	void drawBoard();
 	void fillBoard(int table[9][9]);
 };
