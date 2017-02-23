@@ -33,6 +33,8 @@ private:
 	Board *sceneBoard;
 private slots:
 	void genetateButtonAction();
+	void clearButtonAction();
+	void checkButtonAction();
 };
 
 #endif // MAINWINDOW_H

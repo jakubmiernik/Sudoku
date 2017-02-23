@@ -33,9 +33,11 @@ public:
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
     QGraphicsView *graphicsView;
+    QPushButton *checkButton;
     QFrame *frame;
     QHBoxLayout *horizontalLayout;
     QPushButton *generateButton;
+    QPushButton *clearButton;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -64,6 +66,11 @@ public:
 
         verticalLayout->addWidget(graphicsView);
 
+        checkButton = new QPushButton(centralWidget);
+        checkButton->setObjectName(QStringLiteral("checkButton"));
+
+        verticalLayout->addWidget(checkButton);
+
         frame = new QFrame(centralWidget);
         frame->setObjectName(QStringLiteral("frame"));
         QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Preferred);
@@ -81,6 +88,11 @@ public:
         generateButton->setObjectName(QStringLiteral("generateButton"));
 
         horizontalLayout->addWidget(generateButton);
+
+        clearButton = new QPushButton(frame);
+        clearButton->setObjectName(QStringLiteral("clearButton"));
+
+        horizontalLayout->addWidget(clearButton);
 
 
         verticalLayout->addWidget(frame);
@@ -105,7 +117,9 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
-        generateButton->setText(QApplication::translate("MainWindow", "PushButton", 0));
+        checkButton->setText(QApplication::translate("MainWindow", "Check", 0));
+        generateButton->setText(QApplication::translate("MainWindow", "New Sudoku", 0));
+        clearButton->setText(QApplication::translate("MainWindow", "Clear", 0));
     } // retranslateUi
 
 };

@@ -16,7 +16,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	scene->update();
 
 	connect(ui->generateButton, SIGNAL(clicked()), this, SLOT(genetateButtonAction()));
-
+	connect(ui->clearButton, SIGNAL(clicked()), this, SLOT(clearButtonAction()));
+	connect(ui->checkButton, SIGNAL(clicked()), this, SLOT(checkButtonAction()));
 }
 
 MainWindow::~MainWindow()
@@ -25,10 +26,37 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::genetateButtonAction() {
+	QMessageBox msgBox;
+	msgBox.setWindowTitle("New sudoku");
+	msgBox.setIcon(QMessageBox::Question);
+	msgBox.setText(trUtf8("Are you sure?"));
+	msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+	msgBox.setDefaultButton(QMessageBox::No);
+	
+	int answer = msgBox.exec();
+	if (answer == QMessageBox::Yes) {
+		Sudoku *generatedSudoku = new Sudoku();
+		generatedSudoku->generateSudokuPuzzle(7);
+		sceneBoard->fillBoard(generatedSudoku->sudokuTable);
+	}
+}
 
-	//TO DO: add widnow which ask for aprove
-	Sudoku *generatedSudoku = new Sudoku();
-	generatedSudoku->generateSudokuPuzzle(7);
-	sceneBoard->fillBoard(generatedSudoku->sudokuTable);
+void MainWindow::clearButtonAction() {
+	QMessageBox msgBox;
+	msgBox.setWindowTitle("Clear sudoku");
+	msgBox.setIcon(QMessageBox::Question);
+	msgBox.setText(trUtf8("Are you sure?"));
+	msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+	msgBox.setDefaultButton(QMessageBox::No);
 
+	int answer = msgBox.exec();
+	if (answer == QMessageBox::Yes) {
+		sceneBoard->clear();
+	}
+}
+
+void MainWindow::checkButtonAction() {
+	QMessageBox msgBox;
+	msgBox.setWindowTitle("Clear sudoku");
+	msgBox.exec();
 }

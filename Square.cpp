@@ -79,6 +79,10 @@ void Square::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 		}
 	}
 	else if (sIsMarged == true) {
+		if (sIsConstant) {
+			thinPen.setColor(Qt::gray);
+			painter->setPen(thinPen);
+		}
 		this->adaptFontSize(painter, Qt::AlignCenter, rect, QString::number(sValue));
 		painter->drawText(rect, Qt::AlignCenter, QString::number(sValue));
 	}
