@@ -21,6 +21,7 @@ private:
 	bool sSelectedNumbers[9];	//list of selected square which could by on this square
 	bool sIsMarged;				//flag if square should be marged or not
 	bool sIsConstant;			//flag to diable ability to change value 
+	//QPen numberPen;				//pen to drow number
 
 	int checkWhichMiniSquare(QPointF mousePos);
 	int * miniSquareNumberToCoordinates(int numer);
@@ -40,6 +41,7 @@ public:
 	void mousePressEvent(QGraphicsSceneMouseEvent * event);
 	void mouseDoubleClickEvent(QGraphicsSceneMouseEvent * event);
 	static int squareGlobalCoordinatesToGlobalNumber(int xCoordinate, int yCoordinate);
+	int getValue();
 };
 
 #endif //SQUARE_H

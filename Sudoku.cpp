@@ -16,7 +16,6 @@ Sudoku::Sudoku(){
 			sudokuTable[xx][yy] = tmp[xx][yy];
 		}
 	}*/
-	this->generateSudoku();
 }
 
 Sudoku::Sudoku(int sSudokuTable[9][9]) {
@@ -37,13 +36,14 @@ void Sudoku::generateSudokuPuzzle(int difficultLevel) {
 	// first generate full solved sudoku
 	this->generateSudoku();
 
-	int cellsToClear = 20;
+	int cellsToClear = 0;
 	int numberOfEmpty = 0;
 	srand(time(NULL));
 
 	int watchdog = 0;
 	// next dig the holes
 	while (cellsToClear > numberOfEmpty) {
+		watchdog++;
 		// select random cell to clear;
 		int x = rand() % 9;
 		int y = rand() % 9;
@@ -116,9 +116,10 @@ void Sudoku::generateSudoku(){
 	int watchdogCounter = 0; 
 	for (int yy = 0; yy < 9; yy++) {
 		watchdogCounter++;
-		if (watchdogCounter > 100) {
-			break;
-			this->generateSudoku();
+		if (watchdogCounter > 1000) {
+			watchdogCounter = 0;
+			yy = 0;
+			this->clear();
 		}
 		//filling the vector of possible numbers for yy row
 		possibleNumbers.clear();
@@ -136,12 +137,15 @@ void Sudoku::generateSudoku(){
 				random = rand() % possibleNumbers.size();
 				number = possibleNumbers[random];
 				counter++;
-			} while (checkNumber(xx, yy, number) == false && counter < 10);
+			} while (checkNumber(xx, yy, number) == false && counter < 20);
 			// if 10 times program cant fit number  
 			// remove this row and redo this row
-			if (counter >= 10) {
+			if (counter >= 20) {
 				for (int iitmp = 0; iitmp < 9; iitmp++) {
 					sudokuTable[yy][iitmp] = 0;
+				}
+				for (int ii = 0; ii < 9; ii++) {
+					sudokuTable[yy][ii] = 0;
 				}
 				yy--;
 				break;
@@ -152,22 +156,21 @@ void Sudoku::generateSudoku(){
 			possibleNumbers.erase(possibleNumbers.begin() + random);
 		}
 	}
+	this->debugPrintSudoku();
 }
 
 bool Sudoku::checkNumber(int xCoordinate, int yCoordinate, int value) {
 	//function check if number witch 'value' vaule can be on position (xCoordinate, yCoordinate)
 	// in our Sudoku table 
 	// if return true - this number can be on this position
-	bool answer = true;
+
 	//checking rows and columns
 	for (int ii = 0; ii < 9; ii++) {
-		if (sudokuTable[yCoordinate][ii] == value) {
-			answer = false;
-			break;
+		if (sudokuTable[yCoordinate][ii] == value && yCoordinate != ii) {
+			return false;
 		}
-		if (sudokuTable[ii][xCoordinate] == value) {
-			answer = false;
-			break;
+		if (sudokuTable[ii][xCoordinate] == value && xCoordinate != ii) {
+			return false;
 		}
 	}
 	//checking 3x3 group
@@ -177,12 +180,25 @@ bool Sudoku::checkNumber(int xCoordinate, int yCoordinate, int value) {
 			int squareX = (groupNumber[0] - 1) * 3 + xx;
 			int squareY = (groupNumber[1] - 1) * 3 + yy;
 			if (sudokuTable[squareY][squareX] == value) {
-				answer = false;
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
+bool Sudoku::checkSudoku() {
+	//function check if sudoku in sudokuTable[] is correct
+	bool correct = true;
+	for (int xx = 0; xx < 9; xx++) {
+		for (int yy = 0; yy < 9; yy++) {
+			if (!(this->checkNumber(xx, yy, sudokuTable[yy][xx]))) {
+				correct = false;
 				break;
 			}
 		}
 	}
-	return answer;
+	return correct;
 }
 
 int* Sudoku::squareCoordinatesToGroupCoordinates(int x, int y) {
@@ -214,4 +230,8 @@ void Sudoku::debugPrintSudoku() {
 		OutputDebugStringA("\n");
 	}
 	OutputDebugStringA("\n");
+}
+
+void Sudoku::clear() {
+	std::fill(sudokuTable[0] + 0, sudokuTable[8] + 9, 0);
 }

@@ -20,8 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(ui->checkButton, SIGNAL(clicked()), this, SLOT(checkButtonAction()));
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow(){
     delete ui;
 }
 
@@ -57,6 +56,13 @@ void MainWindow::clearButtonAction() {
 
 void MainWindow::checkButtonAction() {
 	QMessageBox msgBox;
-	msgBox.setWindowTitle("Clear sudoku");
+	
+
+	Sudoku sudoku = sceneBoard->getSudoku();
+	bool correct = sudoku.checkSudoku();
+	if (correct)
+		msgBox.setText("Congratulation");
+	else
+		msgBox.setText("Try again");
 	msgBox.exec();
 }

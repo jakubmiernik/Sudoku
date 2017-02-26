@@ -14,11 +14,13 @@ Board::~Board(){
 }
 
 void Board::clear() {
+	//function to clear all squares on board
 	for (int ii = 0; ii < 81; ii++) {
 		squares[ii]->clear();
 	}
 }
 void Board::drawBoard(){
+	//function frow board (only board without squares)
 	for (int ii = 0; ii<3; ii++) {
 		for (int jj = 0; jj<3; jj++) {
 			//int nBoard = ii * 3 + jj;
@@ -30,6 +32,7 @@ void Board::drawBoard(){
 }
 
 void Board::fillBoard(int table[9][9]) {
+	//function fill squares with values from table[][]
 	this->clear();
 	for (int yy = 0; yy < 9; yy++) {
 		for (int xx = 0; xx < 9; xx++) {
@@ -39,4 +42,18 @@ void Board::fillBoard(int table[9][9]) {
 		}
 	}
 
+}
+
+Sudoku Board::getSudoku(){
+	//function return sudoku which is on board 
+	
+	int table[9][9];
+	for (int yy = 0; yy < 9; yy++) {
+		for (int xx = 0; xx < 9; xx++) {
+			int squareNumber = Square::squareGlobalCoordinatesToGlobalNumber(xx + 1, yy + 1);
+			table[yy][xx] = squares[squareNumber]->getValue();
+		}
+	}
+	Sudoku sudoku = Sudoku(table);
+	return sudoku;
 }

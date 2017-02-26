@@ -147,6 +147,11 @@ int Square::squareGlobalCoordinatesToGlobalNumber(int xCoordinate, int yCoordina
 	return (xCoordinate + 9 * (yCoordinate - 1)) - 1;
 }
 
+int Square::getValue()
+{
+	return sValue;
+}
+
 void Square::setSquateCoordinations() {
 	sXCoordinate = (sSquareNumber % 9) + 1;
 	sYCoordinate = sSquareNumber / 9 + 1;

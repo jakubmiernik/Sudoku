@@ -24,8 +24,10 @@ public:
 	bool solveSudoku();
 	void generateSudoku(); // TO DO: move it to private
 	bool checkNumber(int xCoordinate, int yCoordinate, int value);
+	bool checkSudoku();
 	int* squareCoordinatesToGroupCoordinates(int x, int y);
 	void debugPrintSudoku();
+	void clear();
 };
 
 #endif //SUDOKU_H
