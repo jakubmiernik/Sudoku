@@ -20,6 +20,7 @@ public:
 	void drawBoard();
 	void fillBoard(int table[9][9]);
 	Sudoku getSudoku();
+	Square* getSquare(int xSquare, int ySquare);
 };
 
 #endif //BOARD_H

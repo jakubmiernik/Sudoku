@@ -34,6 +34,7 @@ void MainWindow::genetateButtonAction() {
 	
 	int answer = msgBox.exec();
 	if (answer == QMessageBox::Yes) {
+		sceneBoard->clear();
 		Sudoku *generatedSudoku = new Sudoku();
 		generatedSudoku->generateSudokuPuzzle(7);
 		sceneBoard->fillBoard(generatedSudoku->sudokuTable);
@@ -57,12 +58,18 @@ void MainWindow::clearButtonAction() {
 void MainWindow::checkButtonAction() {
 	QMessageBox msgBox;
 	
-
 	Sudoku sudoku = sceneBoard->getSudoku();
-	bool correct = sudoku.checkSudoku();
+	int bedCell[2];
+	std::vector <int> bedCellsCoordinates;	//pair of x,y one pair after another
+	bool correct = sudoku.checkSudoku(bedCellsCoordinates);
 	if (correct)
 		msgBox.setText("Congratulation");
-	else
+	else {
 		msgBox.setText("Try again");
+		for (int ii = 0; ii < bedCellsCoordinates.size(); ii = ii + 2) {
+			Square* bedSquare = sceneBoard->getSquare(bedCellsCoordinates[ii], bedCellsCoordinates[ii+1]);
+			bedSquare->changeColor(Qt::red);
+		}
+	}
 	msgBox.exec();
 }

@@ -4,6 +4,7 @@
 Square::Square(){
 	sSquareNumber = 0;
 	sValue = 0;
+	numbersPen = new QPen(Qt::black, THIN_PEN_THICKNESS);
 	sIsMarged = false;
 	sIsConstant = false;
 	for (int ii = 0; ii < 9; ii++) 
@@ -15,6 +16,7 @@ Square::Square(){
 Square::Square(int squareNumber) {
 	sSquareNumber = squareNumber;
 	sValue = 0;
+	numbersPen = new QPen(Qt::black, THIN_PEN_THICKNESS);
 	sIsMarged = false;
 	sIsConstant = false;
 	for (int ii = 0; ii < 9; ii++) 
@@ -39,6 +41,7 @@ void Square::setConstantValue(int value)
 void Square::clear() {
 	sValue = 0;
 	sIsMarged = false;
+	numbersPen = new QPen(Qt::black, THIN_PEN_THICKNESS);
 	sIsConstant = false;
 	for (int ii = 0; ii < 9; ii++)
 		sSelectedNumbers[ii] = false;
@@ -57,11 +60,11 @@ void Square::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 
 	//drawing edges of square
 	QPen normalPen(Qt::black, NORMAL_PEN_THICKNESS);
-	QPen thinPen(Qt::black, THIN_PEN_THICKNESS);
+	//QPen thinPen(Qt::black, THIN_PEN_THICKNESS);
 	painter->setPen(normalPen);
 	painter->drawRect(rect);
 
-	painter->setPen(thinPen);
+	painter->setPen(*numbersPen);
 	//drawing mini squares
 	if (sIsMarged == false) {
 		for (int yy = 1; yy<4; yy++) {
@@ -80,8 +83,8 @@ void Square::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 	}
 	else if (sIsMarged == true) {
 		if (sIsConstant) {
-			thinPen.setColor(Qt::gray);
-			painter->setPen(thinPen);
+			numbersPen->setColor(Qt::gray);
+			painter->setPen(*numbersPen);
 		}
 		this->adaptFontSize(painter, Qt::AlignCenter, rect, QString::number(sValue));
 		painter->drawText(rect, Qt::AlignCenter, QString::number(sValue));
@@ -93,11 +96,13 @@ void Square::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 void Square::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
 	int miniSquareClicked = this->checkWhichMiniSquare(event->pos());
+	numbersPen->setColor(Qt::black);
 	sSelectedNumbers[miniSquareClicked] = !sSelectedNumbers[miniSquareClicked];
 	this->update();
 }
 
 void Square::mouseDoubleClickEvent(QGraphicsSceneMouseEvent * event) {
+	numbersPen->setColor(Qt::black);
 	if (!sIsConstant) {
 		sIsMarged = !sIsMarged;
 		sValue = this->checkWhichMiniSquare(event->pos()) + 1;	//+1 because squareNumber is (0-8)
@@ -181,4 +186,10 @@ void Square::adaptFontSize(QPainter * painter, int flags, QRectF drawRect, QStri
 	QFont f = painter->font();
 	f.setPointSizeF(f.pointSizeF()*factor);
 	painter->setFont(f);
+}
+
+void Square::changeColor(const QColor color) {
+	// function to change color of numbers in square
+	numbersPen->setColor(color);
+	this->update();
 }

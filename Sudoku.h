@@ -24,8 +24,8 @@ public:
 	bool solveSudoku();
 	void generateSudoku(); // TO DO: move it to private
 	bool checkNumber(int xCoordinate, int yCoordinate, int value);
-	bool checkSudoku();
-	int* squareCoordinatesToGroupCoordinates(int x, int y);
+	bool checkSudoku(std::vector <int>& bedCellsCoordinates);
+	void squareCoordinatesToGroupCoordinates(int x, int y, int groupCoordinates[2]);
 	void debugPrintSudoku();
 	void clear();
 };

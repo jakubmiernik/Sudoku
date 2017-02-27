@@ -57,3 +57,8 @@ Sudoku Board::getSudoku(){
 	Sudoku sudoku = Sudoku(table);
 	return sudoku;
 }
+
+Square* Board::getSquare(int xSquare, int ySquare) {
+	int number = Square::squareGlobalCoordinatesToGlobalNumber(xSquare + 1, ySquare + 1);
+	return squares[number];
+}

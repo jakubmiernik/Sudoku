@@ -7,6 +7,8 @@
 #include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <QMessageBox>
+#include <algorithm>
+#include <vector>
 
 #include "Square.h"
 #include "Board.h"

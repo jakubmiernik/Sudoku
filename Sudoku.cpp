@@ -36,7 +36,7 @@ void Sudoku::generateSudokuPuzzle(int difficultLevel) {
 	// first generate full solved sudoku
 	this->generateSudoku();
 
-	int cellsToClear = 0;
+	int cellsToClear = 2;
 	int numberOfEmpty = 0;
 	srand(time(NULL));
 
@@ -166,20 +166,21 @@ bool Sudoku::checkNumber(int xCoordinate, int yCoordinate, int value) {
 
 	//checking rows and columns
 	for (int ii = 0; ii < 9; ii++) {
-		if (sudokuTable[yCoordinate][ii] == value && yCoordinate != ii) {
+		if (sudokuTable[yCoordinate][ii] == value && xCoordinate != ii) {
 			return false;
 		}
-		if (sudokuTable[ii][xCoordinate] == value && xCoordinate != ii) {
+		if (sudokuTable[ii][xCoordinate] == value && yCoordinate != ii) {
 			return false;
 		}
 	}
 	//checking 3x3 group
-	int* groupNumber = this->squareCoordinatesToGroupCoordinates(xCoordinate, yCoordinate);
+	int groupNumber[2];
+	this->squareCoordinatesToGroupCoordinates(xCoordinate, yCoordinate, groupNumber);
 	for (int yy = 0; yy < 3; yy++) {
 		for (int xx = 0; xx < 3; xx++) {
 			int squareX = (groupNumber[0] - 1) * 3 + xx;
 			int squareY = (groupNumber[1] - 1) * 3 + yy;
-			if (sudokuTable[squareY][squareX] == value) {
+			if (sudokuTable[squareY][squareX] == value && (squareX != xCoordinate && squareY != yCoordinate)) {
 				return false;
 			}
 		}
@@ -187,21 +188,22 @@ bool Sudoku::checkNumber(int xCoordinate, int yCoordinate, int value) {
 	return true;
 }
 
-bool Sudoku::checkSudoku() {
+bool Sudoku::checkSudoku(std::vector <int>& bedCellsCoordinates) {
 	//function check if sudoku in sudokuTable[] is correct
 	bool correct = true;
 	for (int xx = 0; xx < 9; xx++) {
 		for (int yy = 0; yy < 9; yy++) {
 			if (!(this->checkNumber(xx, yy, sudokuTable[yy][xx]))) {
+				bedCellsCoordinates.push_back(xx);
+				bedCellsCoordinates.push_back(yy);
 				correct = false;
-				break;
 			}
 		}
 	}
 	return correct;
 }
 
-int* Sudoku::squareCoordinatesToGroupCoordinates(int x, int y) {
+void Sudoku::squareCoordinatesToGroupCoordinates(int x, int y, int groupCoordinates[2]) {
 	// TO DO: zamiast zwracac tablice lepiej podawac ja do wypelnienai przez referencje 
 	// function to get number of sudoku group (3x3) for given number on position (x,y)
 
@@ -215,8 +217,8 @@ int* Sudoku::squareCoordinatesToGroupCoordinates(int x, int y) {
 	else if (y >= 3 && y < 6) groupY = 2;
 	else if (y >= 6 && y < 9) groupY = 3;
 
-	int groupCoordinates[2] = { groupX , groupY};
-	return groupCoordinates;
+	groupCoordinates[0] = groupX;
+	groupCoordinates[1] = groupY;
 }
 
 void Sudoku::debugPrintSudoku() {
