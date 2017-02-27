@@ -152,6 +152,15 @@ int Square::squareGlobalCoordinatesToGlobalNumber(int xCoordinate, int yCoordina
 	return (xCoordinate + 9 * (yCoordinate - 1)) - 1;
 }
 
+void Square::squareGlobalNumberToGlobalCoordinates(int globalNumber, int globalCoordinates[2])
+{
+	//function to change Global Number of Square (0-80) to global coordinates of square (1-9)x(1-9)
+	globalCoordinates[0] = (globalNumber % 9) + 1;  //x
+	globalCoordinates[1] = globalNumber / 9 + 1;	//y
+}
+
+
+
 int Square::getValue()
 {
 	return sValue;

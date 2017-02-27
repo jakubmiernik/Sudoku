@@ -14,6 +14,7 @@
 #include "Board.h"
 #include "Sudoku.h"
 #include "Config.h"
+#include "DiffDialog.h"
 #include "ui_mainwindow.h"
 
 

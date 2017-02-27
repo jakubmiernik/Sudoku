@@ -34,10 +34,16 @@ void MainWindow::genetateButtonAction() {
 	
 	int answer = msgBox.exec();
 	if (answer == QMessageBox::Yes) {
+		int diffLevel = 0;
+
+		DiffDialog diffDialog;
+		diffDialog.exec();
+		diffLevel = diffDialog.getDiffValue();
 		sceneBoard->clear();
 		Sudoku *generatedSudoku = new Sudoku();
-		generatedSudoku->generateSudokuPuzzle(7);
+		generatedSudoku->generateSudokuPuzzle(diffLevel);
 		sceneBoard->fillBoard(generatedSudoku->sudokuTable);
+		
 	}
 }
 

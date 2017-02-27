@@ -41,6 +41,7 @@ public:
 	void mousePressEvent(QGraphicsSceneMouseEvent * event);
 	void mouseDoubleClickEvent(QGraphicsSceneMouseEvent * event);
 	static int squareGlobalCoordinatesToGlobalNumber(int xCoordinate, int yCoordinate);
+	static void squareGlobalNumberToGlobalCoordinates(int globalNumber, int globalCoordinates[2]);
 	int getValue();
 	void changeColor(const QColor color);
 };
