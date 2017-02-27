@@ -36,17 +36,29 @@ void Sudoku::generateSudokuPuzzle(int difficultLevel) {
 	// first generate full solved sudoku
 	this->generateSudoku();
 
-	int cellsToClear = 2;
+	int cellsToClear = difficultLevel;
 	int numberOfEmpty = 0;
 	srand(time(NULL));
+
+	//vector of possible cells to clear (0-80)
+	std::vector <int> possibleCells;
+	for (int ii = 0; ii < 81; ii++) {
+		possibleCells.push_back(ii);
+	}
 
 	int watchdog = 0;
 	// next dig the holes
 	while (cellsToClear > numberOfEmpty) {
 		watchdog++;
 		// select random cell to clear;
-		int x = rand() % 9;
-		int y = rand() % 9;
+		int index = rand() % possibleCells.size();
+		int cellNumber = possibleCells[index];
+		
+		//cell number to coordinates
+		int coordinates[2];
+		Square::squareGlobalNumberToGlobalCoordinates(cellNumber, coordinates);
+		int x = coordinates[0]-1;
+		int y = coordinates[1]-1;
 
 		// clear this cell but remember this value
 		int selectedValue = sudokuTable[y][x];
@@ -56,6 +68,7 @@ void Sudoku::generateSudokuPuzzle(int difficultLevel) {
 		Sudoku *tmpSudoku = new Sudoku(sudokuTable);
 		if (tmpSudoku->solveSudoku()) {
 			numberOfEmpty++;
+			possibleCells.erase(possibleCells.begin() + index);
 		}
 		else {
 			sudokuTable[y][x] = selectedValue;
@@ -156,7 +169,7 @@ void Sudoku::generateSudoku(){
 			possibleNumbers.erase(possibleNumbers.begin() + random);
 		}
 	}
-	this->debugPrintSudoku();
+	//this->debugPrintSudoku();
 }
 
 bool Sudoku::checkNumber(int xCoordinate, int yCoordinate, int value) {

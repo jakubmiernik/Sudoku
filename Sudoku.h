@@ -9,6 +9,7 @@
 #include <Windows.h>
 
 #include "Config.h"
+#include "Square.h"
 
 
 class Sudoku
