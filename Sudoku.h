@@ -15,20 +15,20 @@
 class Sudoku
 {
 private:
-
+	int sudokuTable[9][9];		// name convention: sudokuTable[yy][xx]
+	void generateSudoku();
+	bool solveSudoku();
 public:
-	int sudokuTable[9][9];		//name convention: sudokuTable[yy][xx]
 	Sudoku();
-	Sudoku(int sSudokuTable[9][9]);
+	explicit Sudoku(int sSudokuTable[9][9]);
 	~Sudoku();
 	void generateSudokuPuzzle(int difficultLevel);
-	bool solveSudoku();
-	void generateSudoku(); // TO DO: move it to private
 	bool checkNumber(int xCoordinate, int yCoordinate, int value);
 	bool checkSudoku(std::vector <int>& bedCellsCoordinates);
 	void squareCoordinatesToGroupCoordinates(int x, int y, int groupCoordinates[2]);
 	void debugPrintSudoku();
 	void clear();
+	void getSudokuTable(int sSudokuTable[9][9]) const;
 };
 
 #endif //SUDOKU_H

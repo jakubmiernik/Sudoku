@@ -46,10 +46,8 @@ void Sudoku::generateSudokuPuzzle(int difficultLevel) {
 		possibleCells.push_back(ii);
 	}
 
-	int watchdog = 0;
 	// next dig the holes
 	while (cellsToClear > numberOfEmpty) {
-		watchdog++;
 		// select random cell to clear;
 		int index = rand() % possibleCells.size();
 		int cellNumber = possibleCells[index];
@@ -73,11 +71,7 @@ void Sudoku::generateSudokuPuzzle(int difficultLevel) {
 		else {
 			sudokuTable[y][x] = selectedValue;
 		}
-		if (watchdog > 10000) {
-			break;
-			OutputDebugStringA("Loop killed by watchdog");
-		}
-			
+		delete tmpSudoku;
 	}
 }
 
@@ -217,7 +211,6 @@ bool Sudoku::checkSudoku(std::vector <int>& bedCellsCoordinates) {
 }
 
 void Sudoku::squareCoordinatesToGroupCoordinates(int x, int y, int groupCoordinates[2]) {
-	// TO DO: zamiast zwracac tablice lepiej podawac ja do wypelnienai przez referencje 
 	// function to get number of sudoku group (3x3) for given number on position (x,y)
 
 	int groupX = 0;
@@ -249,4 +242,13 @@ void Sudoku::debugPrintSudoku() {
 
 void Sudoku::clear() {
 	std::fill(sudokuTable[0] + 0, sudokuTable[8] + 9, 0);
+}
+
+void Sudoku::getSudokuTable(int sSudokuTable[9][9]) const
+{
+	for (int yy = 0; yy < 9; yy++) {
+		for (int xx = 0; xx < 9; xx++) {
+			sSudokuTable[yy][xx] = sudokuTable[yy][xx];
+		}
+	}
 }

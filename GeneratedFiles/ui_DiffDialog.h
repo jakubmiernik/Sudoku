@@ -45,7 +45,7 @@ public:
         horizontalSlider->setObjectName(QStringLiteral("horizontalSlider"));
         horizontalSlider->setGeometry(QRect(40, 110, 241, 22));
         horizontalSlider->setMinimum(10);
-        horizontalSlider->setMaximum(50);
+        horizontalSlider->setMaximum(45);
         horizontalSlider->setValue(30);
         horizontalSlider->setOrientation(Qt::Horizontal);
         horizontalSlider->setInvertedAppearance(false);

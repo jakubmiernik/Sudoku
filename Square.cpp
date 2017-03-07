@@ -27,6 +27,7 @@ Square::Square(int squareNumber) {
 
 Square::~Square()
 {
+	delete numbersPen;
 }
 
 void Square::setConstantValue(int value)
@@ -54,7 +55,7 @@ QRectF Square::boundingRect() const
 	return QRectF(sStartLocationX, sStartLocationY, SQUARE_SIZE, SQUARE_SIZE);
 }
 
-void Square::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void Square::paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*)
 {
 	QRectF rect = boundingRect();
 
@@ -134,12 +135,10 @@ int Square::checkWhichMiniSquare(QPointF mousePos)
 	return miniSquareNumber;
 }
 
-int* Square::miniSquareNumberToCoordinates(int numer) {
+void Square::miniSquareNumberToCoordinates(int numer, int coordinates[2]) {
 	// function to change miniSquareNumber (0-8) on coordinates x,y (1-3)
-	int coordinates[2];
 	coordinates[0] = (numer % 3) + 1;
 	coordinates[1] = numer / 3 + 1;
-	return coordinates;
 }
 
 int Square::miniSquareCoordinatesToNumber(int xCoordinate, int yCoordinate) {

@@ -1,7 +1,7 @@
 #include "Board.h"
 
-Board::Board(){
-	thickPen = QPen(Qt::black, THICK_PEN_THICKNESS);
+Board::Board() : thickPen(QPen(Qt::black, THICK_PEN_THICKNESS)){
+	//thickPen = QPen(Qt::black, THICK_PEN_THICKNESS);
 
 	for (int ii = 0; ii < 81; ii++) {
 		squares[ii] = new Square(ii);
@@ -11,6 +11,9 @@ Board::Board(){
 }
 
 Board::~Board(){
+	for (int ii = 0; ii < 81; ii++) {
+		delete squares[ii];
+	}
 }
 
 void Board::clear() {

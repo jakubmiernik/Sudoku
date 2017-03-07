@@ -22,13 +22,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow(){
     delete ui;
+	delete sceneBoard;
 }
 
 void MainWindow::genetateButtonAction() {
 	QMessageBox msgBox;
 	msgBox.setWindowTitle("New sudoku");
 	msgBox.setIcon(QMessageBox::Question);
-	msgBox.setText(trUtf8("Are you sure?"));
+	msgBox.setText(tr("Are you sure?"));
 	msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
 	msgBox.setDefaultButton(QMessageBox::No);
 	
@@ -42,8 +43,11 @@ void MainWindow::genetateButtonAction() {
 		sceneBoard->clear();
 		Sudoku *generatedSudoku = new Sudoku();
 		generatedSudoku->generateSudokuPuzzle(diffLevel);
-		sceneBoard->fillBoard(generatedSudoku->sudokuTable);
+		int tmpTab[9][9];
+		generatedSudoku->getSudokuTable(tmpTab);
+		sceneBoard->fillBoard(tmpTab);
 		
+		delete generatedSudoku;
 	}
 }
 
@@ -51,7 +55,7 @@ void MainWindow::clearButtonAction() {
 	QMessageBox msgBox;
 	msgBox.setWindowTitle("Clear sudoku");
 	msgBox.setIcon(QMessageBox::Question);
-	msgBox.setText(trUtf8("Are you sure?"));
+	msgBox.setText(tr("Are you sure?"));
 	msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
 	msgBox.setDefaultButton(QMessageBox::No);
 
@@ -65,7 +69,6 @@ void MainWindow::checkButtonAction() {
 	QMessageBox msgBox;
 	
 	Sudoku sudoku = sceneBoard->getSudoku();
-	int bedCell[2];
 	std::vector <int> bedCellsCoordinates;	//pair of x,y one pair after another
 	bool correct = sudoku.checkSudoku(bedCellsCoordinates);
 	if (correct)

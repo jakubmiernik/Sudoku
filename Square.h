@@ -24,7 +24,7 @@ private:
 	QPen* numbersPen;				//pen to drow number
 
 	int checkWhichMiniSquare(QPointF mousePos);
-	int * miniSquareNumberToCoordinates(int numer);
+	void miniSquareNumberToCoordinates(int numer, int coordinates[2]);
 	int miniSquareCoordinatesToNumber(int xCoordinate, int yCoordinate);
 	void setSquateCoordinations();
 	void setSquareLocation();
@@ -32,11 +32,11 @@ private:
 
 public:
 	Square();
-	Square(int squareNumber);
+	explicit Square(int squareNumber);
 	~Square();
 	void setConstantValue(int value);
 	void clear();
-	void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget);
+	void paint(QPainter * painter, const QStyleOptionGraphicsItem* , QWidget * widget);
 	void adaptFontSize(QPainter * painter, int flags, QRectF drawRect, QString text);
 	void mousePressEvent(QGraphicsSceneMouseEvent * event);
 	void mouseDoubleClickEvent(QGraphicsSceneMouseEvent * event);
