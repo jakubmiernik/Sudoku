@@ -5,8 +5,8 @@
 
 const int BOARD_START_POINT = -300;
 const int SINGLE_BOARD_SIZE = 200;
-const int SQUARE_SIZE = SINGLE_BOARD_SIZE / 3;
-const int MINI_SQUARE_SIZE = SQUARE_SIZE / 3;
+const double SQUARE_SIZE = SINGLE_BOARD_SIZE / 3.0;
+const double MINI_SQUARE_SIZE = SQUARE_SIZE / 3.0;
 const int OFFSET_BETWEEN_BOARDS = 10;
 
 const int THICK_PEN_THICKNESS = 5;

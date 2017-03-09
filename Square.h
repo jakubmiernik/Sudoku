@@ -23,12 +23,13 @@ private:
 	bool sIsConstant;			//flag to diable ability to change value 
 	QPen* numbersPen;				//pen to drow number
 
-	int checkWhichMiniSquare(QPointF mousePos);
-	void miniSquareNumberToCoordinates(int numer, int coordinates[2]);
-	int miniSquareCoordinatesToNumber(int xCoordinate, int yCoordinate);
+	int checkWhichMiniSquare(QPointF mousePos) const;
+	void miniSquareNumberToCoordinates(int numer, int coordinates[2]) const;
+	int miniSquareCoordinatesToNumber(int xCoordinate, int yCoordinate) const;
+	QRectF boundingRect() const;
 	void setSquateCoordinations();
 	void setSquareLocation();
-	QRectF boundingRect() const;
+	
 
 public:
 	Square();
@@ -42,8 +43,8 @@ public:
 	void mouseDoubleClickEvent(QGraphicsSceneMouseEvent * event);
 	static int squareGlobalCoordinatesToGlobalNumber(int xCoordinate, int yCoordinate);
 	static void squareGlobalNumberToGlobalCoordinates(int globalNumber, int globalCoordinates[2]);
-	int getValue();
 	void changeColor(const QColor color);
+	int getValue() const;
 };
 
 #endif //SQUARE_H

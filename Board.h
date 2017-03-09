@@ -17,10 +17,10 @@ public:
 	Board();
 	~Board();
 	void clear();
-	void drawBoard();
 	void fillBoard(int table[9][9]);
-	Sudoku getSudoku();
-	Square* getSquare(int xSquare, int ySquare);
+	void drawBoard();
+	Sudoku getSudoku() const;
+	Square* getSquare(int xSquare, int ySquare) const;
 };
 
 #endif //BOARD_H

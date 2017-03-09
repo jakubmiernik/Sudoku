@@ -111,7 +111,7 @@ void Square::mouseDoubleClickEvent(QGraphicsSceneMouseEvent * event) {
 	}
 }
 
-int Square::checkWhichMiniSquare(QPointF mousePos) 
+int Square::checkWhichMiniSquare(QPointF mousePos) const
 {
 	//function to check on which mini suare clicked mouse
 	double x = mousePos.x();
@@ -135,13 +135,13 @@ int Square::checkWhichMiniSquare(QPointF mousePos)
 	return miniSquareNumber;
 }
 
-void Square::miniSquareNumberToCoordinates(int numer, int coordinates[2]) {
+void Square::miniSquareNumberToCoordinates(int numer, int coordinates[2]) const {
 	// function to change miniSquareNumber (0-8) on coordinates x,y (1-3)
 	coordinates[0] = (numer % 3) + 1;
 	coordinates[1] = numer / 3 + 1;
 }
 
-int Square::miniSquareCoordinatesToNumber(int xCoordinate, int yCoordinate) {
+int Square::miniSquareCoordinatesToNumber(int xCoordinate, int yCoordinate) const {
 	// function to change miniSquareCoordinates (1-3) on squareNumber (0-8)
 	return (xCoordinate + 3 * (yCoordinate - 1)) - 1;
 }
@@ -151,8 +151,7 @@ int Square::squareGlobalCoordinatesToGlobalNumber(int xCoordinate, int yCoordina
 	return (xCoordinate + 9 * (yCoordinate - 1)) - 1;
 }
 
-void Square::squareGlobalNumberToGlobalCoordinates(int globalNumber, int globalCoordinates[2])
-{
+void Square::squareGlobalNumberToGlobalCoordinates(int globalNumber, int globalCoordinates[2]) {
 	//function to change Global Number of Square (0-80) to global coordinates of square (1-9)x(1-9)
 	globalCoordinates[0] = (globalNumber % 9) + 1;  //x
 	globalCoordinates[1] = globalNumber / 9 + 1;	//y
@@ -160,8 +159,7 @@ void Square::squareGlobalNumberToGlobalCoordinates(int globalNumber, int globalC
 
 
 
-int Square::getValue()
-{
+int Square::getValue() const {
 	return sValue;
 }
 

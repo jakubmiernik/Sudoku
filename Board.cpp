@@ -47,7 +47,7 @@ void Board::fillBoard(int table[9][9]) {
 
 }
 
-Sudoku Board::getSudoku(){
+Sudoku Board::getSudoku() const {
 	//function return sudoku which is on board 
 	
 	int table[9][9];
@@ -61,7 +61,7 @@ Sudoku Board::getSudoku(){
 	return sudoku;
 }
 
-Square* Board::getSquare(int xSquare, int ySquare) {
+Square* Board::getSquare(int xSquare, int ySquare) const {
 	int number = Square::squareGlobalCoordinatesToGlobalNumber(xSquare + 1, ySquare + 1);
 	return squares[number];
 }

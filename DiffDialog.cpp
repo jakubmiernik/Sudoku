@@ -8,12 +8,9 @@ DiffDialog::DiffDialog(QWidget *parent)
 	connect(ui.generateButton, SIGNAL(clicked()), this, SLOT(close()));
 }
 
-DiffDialog::~DiffDialog()
-{
+DiffDialog::~DiffDialog(){
 }
 
-int DiffDialog::getDiffValue(){
-	
-	int diffValue = ui.horizontalSlider->value();
-	return diffValue;
+int DiffDialog::getDiffValue() const {
+	return ui.horizontalSlider->value();
 }

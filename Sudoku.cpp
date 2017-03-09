@@ -166,7 +166,7 @@ void Sudoku::generateSudoku(){
 	//this->debugPrintSudoku();
 }
 
-bool Sudoku::checkNumber(int xCoordinate, int yCoordinate, int value) {
+bool Sudoku::checkNumber(int xCoordinate, int yCoordinate, int value) const {
 	//function check if number witch 'value' vaule can be on position (xCoordinate, yCoordinate)
 	// in our Sudoku table 
 	// if return true - this number can be on this position
@@ -195,7 +195,7 @@ bool Sudoku::checkNumber(int xCoordinate, int yCoordinate, int value) {
 	return true;
 }
 
-bool Sudoku::checkSudoku(std::vector <int>& bedCellsCoordinates) {
+bool Sudoku::checkSudoku(std::vector <int>& bedCellsCoordinates) const {
 	//function check if sudoku in sudokuTable[] is correct
 	bool correct = true;
 	for (int xx = 0; xx < 9; xx++) {
@@ -227,7 +227,7 @@ void Sudoku::squareCoordinatesToGroupCoordinates(int x, int y, int groupCoordina
 	groupCoordinates[1] = groupY;
 }
 
-void Sudoku::debugPrintSudoku() {
+void Sudoku::debugPrintSudoku() const {
 	// simple function to draw on screen sudoku puzzle
 
 	for (int yy = 0; yy < 9; yy++) {

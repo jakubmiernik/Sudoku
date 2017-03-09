@@ -8,12 +8,11 @@ class DiffDialog : public QDialog
 	Q_OBJECT
 
 public:
+	int getDiffValue() const;
+
 	DiffDialog(QWidget *parent = Q_NULLPTR);
 	~DiffDialog();
 
-	int getDiffValue();
-
 private:
 	Ui::DiffDialog ui;
-
 };
